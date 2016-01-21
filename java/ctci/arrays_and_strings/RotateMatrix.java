@@ -1,4 +1,4 @@
-package arrays_and_strings;
+package ctci.arrays_and_strings;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;
@@ -38,7 +38,7 @@ public class RotateMatrix {
 
 		rotate(matrix, matrix.length);
 		IntStream.range(0, matrix.length).mapToObj(i -> Arrays.stream(matrix[i]).mapToObj(String::valueOf)
-						.collect(joining("\t"))).forEach(System.out::println);
+				.collect(joining("\t"))).forEach(System.out::println);
 
 	}
 

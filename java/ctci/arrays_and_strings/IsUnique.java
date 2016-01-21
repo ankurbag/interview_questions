@@ -1,4 +1,4 @@
-package arrays_and_strings;
+package ctci.arrays_and_strings;
 
 import java.util.List;
 import java.util.stream.Stream;
