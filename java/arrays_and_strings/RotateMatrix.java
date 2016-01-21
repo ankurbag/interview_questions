@@ -3,6 +3,8 @@ package arrays_and_strings;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
+import static java.util.stream.Collectors.joining;
+
 /**
  * 1.7 Given an image represented by an N*N matrix, where each pixel in the image is 4 bytes, write a method to rotate
  * the image by 90 degrees. Can you do this in place?
@@ -35,7 +37,9 @@ public class RotateMatrix {
 		};
 
 		rotate(matrix, matrix.length);
-		IntStream.range(0, matrix.length).forEach(i -> System.out.println(Arrays.toString(matrix[i])));
+		IntStream.range(0, matrix.length).mapToObj(i -> Arrays.stream(matrix[i]).mapToObj(String::valueOf)
+						.collect(joining("\t"))).forEach(System.out::println);
+
 	}
 
 	private static void updateMatrix(int first, int last, int i, int[][] matrix) {
