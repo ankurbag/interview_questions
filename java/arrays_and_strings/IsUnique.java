@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
  * 1.1 Implement an algorithm to determine if a string has all unique characters. What if you cannot use additional
  * data structures?
  */
-public class UniqueCharacters {
+public class IsUnique {
 
 	/**
 	 * Returns true if the given string has all unique characters. This implementation uses boolean array, one boolean
@@ -21,7 +21,7 @@ public class UniqueCharacters {
 	 *
 	 * @return true if the string has all unique chars, false otherwise.
 	 */
-	public static boolean hasUniqueChars(CharSequence str) {
+	public static boolean isUnique(CharSequence str) {
 		if (str.length() > 128) {
 			return false;
 		}
@@ -36,7 +36,7 @@ public class UniqueCharacters {
 	 * @param args ignored
 	 */
 	public static void main(String[] args) {
-		assertTrue(hasUniqueChars("abcdefg"));
-		assertFalse(hasUniqueChars("aabbbaa"));
+		assertTrue(isUnique("abcdefg"));
+		assertFalse(isUnique("aabbbaa"));
 	}
 }
