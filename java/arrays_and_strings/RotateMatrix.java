@@ -1,5 +1,6 @@
 package arrays_and_strings;
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 /**
@@ -12,12 +13,10 @@ public class RotateMatrix {
 	 *
 	 * @param matrix the matrix to rotate
 	 */
-	public static void rotate(int[][] matrix) {
-		int size = matrix.length;
-
+	public static void rotate(int[][] matrix, int size) {
 		IntStream.range(0, size / 2).forEach(
-				layer -> IntStream.range(layer, size - layer - 1)
-						.forEach(i -> updateMatrix(layer, i, matrix)));
+				i -> IntStream.range(i, size - i - 1).forEach(
+						j -> updateMatrix(i, size - i - 1, j - i, matrix)));
 	}
 
 	/**
@@ -27,20 +26,27 @@ public class RotateMatrix {
 	 */
 	public static void main(String[] args) {
 		int[][] matrix = new int[][]{
-				{1, 2, 3, 4},
-				{5, 6, 7, 8},
-				{9, 10, 11, 12},
-				{13, 14, 15, 16}};
-		rotate(matrix);
+				{1, 2, 3, 4, 5, 6},
+				{7, 8, 9, 10, 11, 12},
+				{13, 14, 15, 16, 17, 18},
+				{19, 20, 21, 22, 23, 24},
+				{25, 26, 27, 28, 29, 30},
+				{31, 32, 33, 34, 35, 36},
+		};
+
+		rotate(matrix, matrix.length);
+		IntStream.range(0, matrix.length).forEach(i -> System.out.println(Arrays.toString(matrix[i])));
 	}
 
-	private static void updateMatrix(int first, int i, int[][] matrix) {
-		int offset = i - first;
-		int last = matrix.length - 1 - first;
-		int top = matrix[first][i];
+	private static void updateMatrix(int first, int last, int i, int[][] matrix) {
+		int top = matrix[first][first + i];
+		int right = matrix[first + i][last];
+		int bottom = matrix[last][last - i];
+		int left = matrix[last - i][first];
 
-		matrix[first][i] = matrix[last - offset][first];
-		matrix[last][last - offset] = matrix[i][last];
-		matrix[i][last] = top;
+		matrix[first][first + i] = left;
+		matrix[first + i][last] = top;
+		matrix[last][last - i] = right;
+		matrix[last - i][first] = bottom;
 	}
 }
