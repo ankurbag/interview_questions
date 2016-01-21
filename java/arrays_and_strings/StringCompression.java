@@ -64,16 +64,15 @@ public class StringCompression {
 		}
 
 		private void append() {
-			stringBuilder.append(currentChar);
-			stringBuilder.append(count);
+			if (count != -1) {
+				stringBuilder.append(currentChar);
+				stringBuilder.append(count);
+			}
 		}
 
 		@Override
 		public String toString() {
-			if (count != -1) {
-				append();
-			}
-
+			append();
 			return stringBuilder.toString();
 		}
 	}

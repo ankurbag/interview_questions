@@ -12,7 +12,6 @@ import static org.junit.Assert.assertTrue;
  * data structures?
  */
 public class IsUnique {
-
 	/**
 	 * Returns true if the given string has all unique characters. This implementation uses boolean array, one boolean
 	 * for each character.
