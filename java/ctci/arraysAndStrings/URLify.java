@@ -1,4 +1,4 @@
-package ctci.arrays_and_strings;
+package ctci.arraysAndStrings;
 
 import static org.junit.Assert.assertEquals;
 
