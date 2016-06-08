@@ -1,6 +1,6 @@
 package ctci.linkedLists;
 
-import utils.StreamUtil;
+import ctci.utils.StreamUtil;
 
 import java.util.Arrays;
 import java.util.List;

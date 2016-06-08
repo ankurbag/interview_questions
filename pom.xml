@@ -8,8 +8,6 @@
     <name>Interview Questions</name>
 
     <build>
-        <sourceDirectory>java</sourceDirectory>
-        <testSourceDirectory>test/java</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

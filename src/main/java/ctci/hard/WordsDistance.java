@@ -1,11 +1,10 @@
 package ctci.hard;
 
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -19,44 +18,17 @@ import static org.junit.Assert.assertTrue;
 @SuppressWarnings("WeakerAccess")
 public class WordsDistance {
     private Map<String, List<Integer>> wordsIndicesMap = new HashMap<>();
-    private int counter;
-
-    public static void main(String[] args) throws IOException {
-        URL resource = ClassLoader.getSystemResource("ctci/hard/words_distance.txt");
-        Objects.requireNonNull(resource);
-
-        Path filePath = Paths.get(resource.getPath());
-        WordsDistance wordsDistance = WordsDistance.slurpWords(filePath);
-
-        OptionalLong dist1 = wordsDistance.findDistance("the", "of");
-        assertTrue(dist1.isPresent());
-        assertEquals(17, dist1.getAsLong());
-
-        OptionalLong dist2 = wordsDistance.findDistance("charm", "busy");
-        assertTrue(dist2.isPresent());
-        assertEquals(6, dist2.getAsLong());
-
-        OptionalLong dist3 = wordsDistance.findDistance("in", "this");
-        assertTrue(dist3.isPresent());
-        assertEquals(1, dist3.getAsLong());
-
-        OptionalLong dist4 = wordsDistance.findDistance("the", "the");
-        assertTrue(dist4.isPresent());
-        assertEquals(0, dist4.getAsLong());
-
-        OptionalLong dist5 = wordsDistance.findDistance("same", "same");
-        assertFalse(dist5.isPresent());
-    }
 
     public static WordsDistance slurpWords(Path filePath) throws IOException {
         WordsDistance wordsDistance = new WordsDistance();
+        AtomicInteger counter = new AtomicInteger(0);
 
         Files.lines(filePath)
                 .flatMap(line -> Arrays.stream(line.split("[\\s\\.,;\\?]+")))
                 .map(String::trim)
                 .map(String::toLowerCase)
                 .filter(w -> !w.isEmpty())
-                .forEach(wordsDistance::addWordIndex);
+                .forEach(w -> wordsDistance.addWordIndex(counter, w));
 
         return wordsDistance;
     }
@@ -101,7 +73,7 @@ public class WordsDistance {
         return OptionalLong.of(minDistance);
     }
 
-    private void addWordIndex(final String word) {
-        wordsIndicesMap.computeIfAbsent(word, k -> new ArrayList<>()).add(counter++);
+    private void addWordIndex(final AtomicInteger counter, final String word) {
+        wordsIndicesMap.computeIfAbsent(word, k -> new ArrayList<>()).add(counter.incrementAndGet());
     }
 }

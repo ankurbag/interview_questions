@@ -1,4 +1,4 @@
-package utils;
+package ctci.utils;
 
 import java.util.Comparator;
 import java.util.Spliterator;
