@@ -28,14 +28,4 @@ public class IsUnique {
 		List<Boolean> charExists = Stream.generate(() -> Boolean.FALSE).limit(128).collect(toList());
 		return !str.chars().mapToObj(ch -> charExists.set(ch, true)).anyMatch(Boolean::booleanValue);
 	}
-
-	/**
-	 * Executes test cases.
-	 *
-	 * @param args ignored
-	 */
-	public static void main(String[] args) {
-		assertTrue(isUnique("abcdefg"));
-		assertFalse(isUnique("aabbbaa"));
-	}
 }
